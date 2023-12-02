@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Patrol : MonoBehaviour
+public class PatrolMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private Transform _points;
+    [SerializeField] private Transform  _path;
 
     private int _currentIndexPlace;
 
@@ -13,11 +13,11 @@ public class Patrol : MonoBehaviour
     {
         _currentIndexPlace = 0;
 
-        _places = new Transform[_points.childCount];
+        _places = new Transform[ _path.childCount];
 
-        for (int i = 0; i < _points.childCount; i++)
+        for (int i = 0; i <  _path.childCount; i++)
         {
-            _places[i] = _points.GetChild(i);
+            _places[i] =  _path.GetChild(i);
         }
     }
 
@@ -42,7 +42,7 @@ public class Patrol : MonoBehaviour
             _currentIndexPlace = 0;
         }
 
-        Vector3 pointVector = _places[_currentIndexPlace].transform.position;
-        transform.forward = pointVector - transform.position;
+        Vector3 pointVector = _places[_currentIndexPlace].position;
+        transform.forward = _places[_currentIndexPlace].position - transform.position;
     }
 }
